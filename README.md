@@ -1,5 +1,5 @@
 # ImgTalk
-Image talker, select and image make word maps and talk in a secure way.
+Image talker, select and image make word maps and talk in a secure way. NOTE: the *source* image can literally be anywhere or anything
 
 **Educational Program Disclaimer**
 
