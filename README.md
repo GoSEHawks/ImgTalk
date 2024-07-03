@@ -3,7 +3,7 @@ Image talker, select and image make word maps and talk in a secure way.
 
 **Educational Program Disclaimer**
 
-**Program Title:** Understanding the Image Processing
+**Program Title:** Understanding Image Manipulation
 
 **Purpose:** This educational program is designed to demonstrate and explain the step-by-step process of image processing, from loading an image to applying filters and effects.
 
