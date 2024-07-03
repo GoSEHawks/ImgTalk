@@ -24,6 +24,8 @@ Image talker, select and image make word maps and talk in a secure way.
 
 By using this program, you acknowledge that you have read, understood, and agree to the terms and conditions outlined in this disclaimer.
 
+** see below images of the app use and functionality for renfrence. Clone, install electron and dependencies then run with "npx electronmon ." command to get started.
+
 ![Screenshot 2024-07-03 111257](https://github.com/GoSEHawks/ImgTalk/assets/45705923/b6f8bdbb-6fad-4e8d-afc3-33b02e55fd43)
 ![Screenshot 2024-07-03 111357](https://github.com/GoSEHawks/ImgTalk/assets/45705923/ee4971d5-5c02-42f5-ac4e-83faf5a6a33d)
 ![Screenshot 2024-07-03 111633](https://github.com/GoSEHawks/ImgTalk/assets/45705923/bf595570-07f5-46b1-8ba9-5b1e267cbe9d)
