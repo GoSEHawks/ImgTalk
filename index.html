@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Image Msg Processor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="navbar">
+      <button onclick="showTab('home')">Home</button>
+      <button onclick="showTab('make')">Make</button>
+      <button onclick="showTab('see')">See</button>
+    </div>
+    <div id="content">
+      <div id="home" class="tab-content">
+        <h1>Home</h1>
+        <p>This application allows you to hide a secret message within an image.</p>
+        <p>First, use the 'Make' tab to process an image. Then, use the 'See' tab to encode and decode messages based on the processed image.</p>
+        <table>
+          <tr>
+            <th>Step</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Pick an image</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Encode message</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Scramble your image Alpha and Object maps with a random image</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>You would need the same image used to encode in order to decode message</td>
+          </tr>
+        </table>
+      </div>      
+      <div id="make" class="tab-content">
+        <h1>Make</h1>
+        <input type="file" id="fileInput" accept="image/png, image/jpeg">
+        <button id="processBtn">Process Image</button>
+        <p id="makeMessage"></p>
+      </div>
+      <div id="see" class="tab-content">
+        <h1>See</h1>
+        <textarea id="encodeMessage" placeholder="Enter message to encode"></textarea>
+        <button id="encodeBtn">Encode Message</button>
+        <p id="encodedCoordinates"></p>
+        <textarea id="decodeCoordinates" placeholder="Enter coordinates to decode"></textarea>
+        <button id="decodeBtn">Decode Message</button>
+        <p id="decodedMessage"></p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    let currentTab = 'home';
+
+    function showTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => {
+        tab.style.display = tab.id === tabName ? 'block' : 'none';
+      });
+      currentTab = tabName;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showTab('home');
+    });
+
+    document.getElementById('fileInput').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        ipcRenderer.send('process-image', file.path);
+      }
+    });
+
+    document.getElementById('processBtn').addEventListener('click', () => {
+      const fileInput = document.getElementById('fileInput');
+      if (fileInput.files.length > 0) {
+        ipcRenderer.send('process-image', fileInput.files[0].path);
+      }
+    });
+
+    ipcRenderer.on('alert', (event, message) => {
+      alert(message);
+    });
+
+    ipcRenderer.on('process-image-reply', (event, message) => {
+      document.getElementById('makeMessage').innerText = message;
+    });
+
+    ipcRenderer.on('encoded-message', (event, message) => {
+      document.getElementById('encodedCoordinates').innerText = message;
+    });
+
+    ipcRenderer.on('decoded-message', (event, message) => {
+      document.getElementById('decodedMessage').innerText = message;
+    });
+
+    document.getElementById('encodeBtn').addEventListener('click', () => {
+      const message = document.getElementById('encodeMessage').value;
+      ipcRenderer.send('encode-message', message);
+    });
+
+    document.getElementById('decodeBtn').addEventListener('click', () => {
+      const coordinates = document.getElementById('decodeCoordinates').value;
+      ipcRenderer.send('decode-message', coordinates);
+    });
+  </script>
+</body>
+</html>

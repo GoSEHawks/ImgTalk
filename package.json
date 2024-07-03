@@ -1,0 +1,50 @@
+{
+  "name": "seatme",
+  "productName": "imgTalk",
+  "version": "1.0.0",
+  "description": "IMG-talk",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-builder"
+  },
+  "author": "Ilya",
+  "license": "MIT",
+  "dependencies": {
+    "jimp": "^0.22.12",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yourcompany.imgTalk",
+    "productName": "imgTalk",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "style.css",
+      "YML_alpha.yml",
+      "YML_object.yml"
+    ],
+    "extraFiles": [
+      {
+        "from": "node_modules/electron/dist",
+        "to": "electron"
+      }
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
